@@ -1,6 +1,6 @@
 
 const express = require("express")
-const { PORT, show, UI_PORT } = require("./components")
+const { PORT, show, UI_PORT } = require("./components.js")
 const router = require("./router.js")
 const app = express()
 require("dotenv").config()
