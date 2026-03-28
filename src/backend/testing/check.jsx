@@ -16,46 +16,49 @@ const Check = () => {
     fileInputRef.current.click();
   };
 
-  // Add this inside the Check component
-    const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (!file) {
-    console.log("No file selected");
-    return;
-  }
+    if (!file) {
+      console.log("No file selected");
+      return;
+    }
 
-  const formData = new FormData();
-  formData.append("file", file); // 👈 MUST match upload.single("file")
+    const formData = new FormData();
+    // Ensure "file" matches upload.single("file") in your Node.js route
+    formData.append("file", file); 
 
-  try {
-    const res = await fetch("http://localhost:8081/check", {
-      method: "POST",
-      body: formData
-    });
+    try {
+      const res = await fetch("http://localhost:8081/check", {
+        method: "POST",
+        body: formData,
+        // IMPORTANT: Do NOT set Content-Type header manually. 
+        // The browser will set it to multipart/form-data with the boundary automatically.
+      });
 
-    const data = await res.text();
-    console.log(data);
-  } catch (err) {
-    console.error("Error:", err);
-  }
-    };
+      const data = await res.json(); // Changed to .json() for better handling
+      console.log("Response from server:", data);
+      
+      if(res.ok) {
+        alert("Upload successful!");
+        setFile(null); // Clear the file after success
+      }
+    } catch (err) {
+      console.error("Error during upload:", err);
+    }
+  };
 
   return (
     <div className='checkScreen'>
-      {/* FORM WRAPPER FOR MULTER */}
+      {/* Cleaned up form attributes */}
       <form 
         className="uploadCard" 
-        action="/upload"  // Replace with your API endpoint
-        method="POST"
         onSubmit={handleSubmit} 
-        header={{ 'Content-Type': 'multipart/form-data' }}
       >
         <h1>Upload File</h1>
         <p>Testing Multer Upload</p>
         
         <div className="dropZone" onClick={onBtnClick}>
-          {/* Ensure 'name' matches your multer upload.single('file') name */}
           <input 
             type="file" 
             name="file" 

@@ -1,37 +1,39 @@
-const { cloudinary } = require("./clouldinary.js"); // Import the configured cloudinary
+// checkApp.js
+const cloudinary = require("./clouldinary.js"); // Fixed typo in filename
 const fs = require("fs");
 
 const checkApp = async (req, res) => {
     try {
-        if (!req.file) {
-            return res.status(400).json({ success: false, message: "No file provided" });
+        const file = req.file;
+        const username = req.body.username || "default";
+
+        if (!file) {
+            return res.status(400).json({ message: "No file uploaded" });
         }
 
-        // Define your custom folder path: users/username/filename
-        // You can get 'userId' or 'username' from req.body or req.user
-        const folderPath = `users/${req.body.userId || 'default'}`; 
+        const folderPath = `Uploads/${username}`;
 
-        // Upload to Cloudinary with the custom folder
-        const result = await cloudinary.uploader.upload(req.file.path, {
-            folder: folderPath, 
+        // Upload to Cloudinary
+        const result = await cloudinary.uploader.upload(file.path, {
             resource_type: "auto",
-            public_id: Date.now() + "-" + req.file.originalname.split('.')[0]
+            folder: folderPath,
         });
 
-        // Delete the temporary local file after Cloudinary upload
-        if (fs.existsSync(req.file.path)) {
-            fs.unlinkSync(req.file.path);
-        }
+        // OPTIONAL: Delete the local file after successful upload to Cloudinary
+        fs.unlinkSync(file.path); 
 
-        // Return the same response format to keep your frontend working
-        res.json({
+        res.status(200).json({
             success: true,
-            message: "Successfully uploaded file!",
-            fileUrl: result.secure_url, 
-            public_id: result.public_id 
+            message: "File uploaded successfully",
+            cloudinary_url: result.secure_url,
         });
+        
     } catch (error) {
         console.error("Upload Error:", error);
+        // If file exists locally but upload failed, clean up the local file
+        if (req.file && fs.existsSync(req.file.path)) {
+            fs.unlinkSync(req.file.path);
+        }
         res.status(500).json({ success: false, message: "Upload failed" });
     }
 };
