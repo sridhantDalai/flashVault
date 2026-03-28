@@ -1,4 +1,4 @@
-const { cloudinary } = require("./cloudinary.js"); // Import the configured cloudinary
+const { cloudinary } = require("./clouldinary.js"); // Import the configured cloudinary
 const fs = require("fs");
 
 const checkApp = async (req, res) => {
