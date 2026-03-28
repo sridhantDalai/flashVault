@@ -7,24 +7,27 @@ $text-dim: #888888;
 $border: rgba(255, 255, 255, 0.06);
 
 .dashboard-container {
-  min-height: 100vh;
+  height: 100vh; // Locked to viewport height
+  width: 100vw;  // Locked to viewport width
   background-color: $bg-main;
   color: $text-main;
   font-family: 'Inter', system-ui, sans-serif;
   display: flex;
   justify-content: center;
-  align-items: flex-start; // Better for long scrolling lists on mobile
+  align-items: center; // Center the glass-grid vertically
   padding: 24px;
+  box-sizing: border-box;
+  overflow: hidden; // Prevent the body from scrolling
 
   .glass-grid {
     display: flex;
     width: 100%;
     max-width: 1300px;
-    min-height: 85vh; // Dynamic height
+    height: 85vh; // Fixed height relative to viewport
     background: $bg-card;
     border: 1px solid $border;
     border-radius: 32px;
-    overflow: hidden;
+    overflow: hidden; // Keeps the sidebar and main area contained
     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
   }
 }
@@ -32,12 +35,14 @@ $border: rgba(255, 255, 255, 0.06);
 // --- SIDEBAR ---
 .sidebar-nav {
   width: 280px;
-  flex-shrink: 0; // Prevents sidebar from squishing
+  flex-shrink: 0; 
   background: rgba(255, 255, 255, 0.02);
   border-right: 1px solid $border;
   padding: 40px 24px;
   display: flex;
   flex-direction: column;
+  height: 100%; // Ensure it fills the glass-grid height
+  box-sizing: border-box;
 
   .brand {
     display: flex;
@@ -113,7 +118,17 @@ $border: rgba(255, 255, 255, 0.06);
 .main-viewport {
   flex: 1;
   padding: 40px 60px;
-  overflow-y: auto;
+  overflow-y: auto; // This enables the scrollbar on the right side only
+  height: 100%;    // Ensures it respects the parent's height
+
+  /* Custom Scrollbar Styling (Optional) */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
 
   .content-header {
     display: flex;
@@ -136,6 +151,7 @@ $border: rgba(255, 255, 255, 0.06);
     display: flex;
     flex-direction: column;
     gap: 16px;
+    padding-bottom: 20px; // Space at the bottom of the scroll
   }
 
   .file-item {
@@ -177,7 +193,7 @@ $border: rgba(255, 255, 255, 0.06);
 
     .file-meta {
       flex: 1;
-      min-width: 0; // Essential for text-overflow to work
+      min-width: 0; 
       .file-name { 
         font-size: 1rem; 
         font-weight: 500; 
@@ -205,81 +221,81 @@ $border: rgba(255, 255, 255, 0.06);
       cursor: pointer;
       &:hover { background: white; color: black; }
     }
+
+    .file-actions {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+
+       .delete-btn {
+        background: transparent;
+        border: 1px solid $border;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.2s;
+        font-size: 1.1rem;
+      }
+
+      .download-btn:hover {
+        background: white;
+        color: black;
+      }
+
+      .delete-btn {
+        color: #ff4d4d; // Subtle red icon
+        &:hover {
+          background: #ff4d4d;
+          border-color: #ff4d4d;
+          color: white; // Turns white on red background
+          box-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
+        }
+      }
+    }
+
   }
 }
 
 // --- RESPONSIVENESS ---
-
-// Tablets & Smaller Desktops
 @media (max-width: 1024px) {
   .main-viewport {
     padding: 40px 30px;
   }
 }
 
-// Mobile Devices
 @media (max-width: 768px) {
   .dashboard-container {
     padding: 12px;
-    align-items: stretch;
+    height: 100vh;
+    overflow: hidden; // Keep mobile view contained too
   }
 
   .glass-grid {
     flex-direction: column;
-    height: auto;
+    height: 100%; // Fill the container on mobile
     border-radius: 24px;
   }
 
   .sidebar-nav {
     width: 100%;
+    height: auto; // Let sidebar be natural height on mobile
     border-right: none;
     border-bottom: 1px solid $border;
     padding: 24px;
 
     .brand { margin-bottom: 24px; }
-    
-    .nav-group {
-      flex-direction: row;
-      margin-bottom: 20px;
-      .nav-btn {
-        flex: 1;
-        justify-content: center;
-        padding: 10px;
-        font-size: 0.85rem;
-      }
-    }
-
-    .primary-upload-btn {
-      margin-bottom: 20px;
-    }
-
-    .locker-info {
-      padding: 15px;
-    }
+    .nav-group { flex-direction: row; margin-bottom: 20px; }
+    .primary-upload-btn { margin-bottom: 20px; }
   }
 
   .main-viewport {
     padding: 30px 20px;
-
-    .content-header {
-      margin-bottom: 30px;
-      h1 { font-size: 1.5rem; }
-    }
-
-    .file-item {
-      padding: 12px 16px;
-      gap: 12px;
-      
-      &:hover { transform: none; } // Disable translate on mobile for better UX
-
-      .file-icon {
-        width: 40px;
-        height: 40px;
-      }
-
-      .file-meta .file-name {
-        font-size: 0.9rem;
-      }
-    }
+    flex: 1; // Take up remaining space
+    overflow-y: auto; // Scroll files only
   }
 }

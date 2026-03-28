@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
 import './dashboard.scss';
 
+import { useNavigate } from "react-router-dom";
+
 const Dashboard = () => {
   // Mock data for files
   const [files, setFiles] = useState([
     { id: 1, name: "Project_Final.zip", size: "12.4 MB", date: "2 mins ago" },
     { id: 2, name: "Invoice_March.pdf", size: "1.2 MB", date: "1 hour ago" },
     { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
+    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
+    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
+    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
+    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
+    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
+    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
+    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
   ]);
+
+  const navigate = useNavigate()
+  
+  const handleUpload = () => {
+    navigate("/upload")
+  }
+
+  const handleKey = () => {
+    navigate("/key")
+  }
 
   return (
     <div className="dashboard-container">
@@ -25,14 +44,14 @@ const Dashboard = () => {
               <span className="icon">📁</span>
               Files
             </button>
-            <button className="nav-btn">
+            <button onClick={handleKey} className="nav-btn">
               <span className="icon">🔑</span>
-              ENV Keys
+              ENV Key
             </button>
           </div>
 
           <div className="upload-section">
-             <button className="primary-upload-btn">
+             <button onClick={handleUpload} className="primary-upload-btn">
                <span>+</span> Upload New
              </button>
           </div>
@@ -71,6 +90,13 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <button className="download-btn">↓</button>
+
+                <div className="file-actions">
+                  <button className="delete-btn">
+                    <span className="icon">🗑</span>
+                  </button>
+                </div>
+
               </div>
             ))}
           </div>

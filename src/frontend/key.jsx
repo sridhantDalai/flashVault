@@ -1,8 +1,16 @@
 import React from 'react';
 import './key.scss';
 
+import { useNavigate } from "react-router-dom";
+
 function Key() {
   const envKey = "4A2B-91X7-KL09-PROX"; // Placeholder key
+
+  const navigate = useNavigate()
+
+  const handleDashboard = () => {
+    navigate("/dashboard")
+  }
 
   return (
     <div className="container">
@@ -13,7 +21,7 @@ function Key() {
           <code>{envKey}</code>
         </div>
 
-        <button className="dashboard-btn" onClick={() => console.log('Redirecting...')}>
+        <button onClick={handleDashboard} className="dashboard-btn" >
           Goto dashboard
         </button>
       </div>
