@@ -1,6 +1,6 @@
-const cloudinary = require("cloudinary").v2; // Use .v2 for the modern API
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary"); // 👈 Add this line
 const multer = require("multer");
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const { cloudName, apiKey, apiSecrect } = require("../components.js");
 
 cloudinary.config({
