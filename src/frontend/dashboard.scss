@@ -1,0 +1,285 @@
+// Theme Colors
+$bg-main: #0a0a0a; 
+$bg-card: #141414; 
+$accent: #00ffa3; 
+$text-main: #ffffff;
+$text-dim: #888888;
+$border: rgba(255, 255, 255, 0.06);
+
+.dashboard-container {
+  min-height: 100vh;
+  background-color: $bg-main;
+  color: $text-main;
+  font-family: 'Inter', system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; // Better for long scrolling lists on mobile
+  padding: 24px;
+
+  .glass-grid {
+    display: flex;
+    width: 100%;
+    max-width: 1300px;
+    min-height: 85vh; // Dynamic height
+    background: $bg-card;
+    border: 1px solid $border;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+  }
+}
+
+// --- SIDEBAR ---
+.sidebar-nav {
+  width: 280px;
+  flex-shrink: 0; // Prevents sidebar from squishing
+  background: rgba(255, 255, 255, 0.02);
+  border-right: 1px solid $border;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 50px;
+    .logo-dot {
+      width: 12px;
+      height: 12px;
+      background: $accent;
+      border-radius: 50%;
+      box-shadow: 0 0 15px $accent;
+    }
+  }
+
+  .nav-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: $text-dim;
+      padding: 14px 18px;
+      border-radius: 14px;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.2s;
+
+      &:hover { color: white; background: rgba(255, 255, 255, 0.04); }
+      &.active {
+        color: white;
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+
+  .primary-upload-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    border: none;
+    background: white;
+    color: black;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: 0.2s;
+    &:hover { transform: translateY(-2px); background: $accent; }
+  }
+
+  .locker-info {
+    padding: 20px;
+    background: rgba(0, 255, 163, 0.05);
+    border-radius: 20px;
+    border: 1px dashed rgba($accent, 0.3);
+    text-align: center;
+    .label { font-size: 0.7rem; color: $text-dim; text-transform: uppercase; }
+    .id { font-size: 1.1rem; color: $accent; font-weight: 700; margin-top: 4px; }
+  }
+}
+
+// --- MAIN AREA ---
+.main-viewport {
+  flex: 1;
+  padding: 40px 60px;
+  overflow-y: auto;
+
+  .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+
+    h1 { font-size: 2rem; font-weight: 600; letter-spacing: -1px; }
+    .subtitle { color: $text-dim; margin-top: 4px; }
+
+    .user-profile img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid $border;
+    }
+  }
+
+  .files-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .file-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $border;
+    border-radius: 20px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba($accent, 0.2);
+    }
+
+    .file-icon {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0;
+      background: #1a1a1a;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      
+      .glow-effect {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: $accent;
+        filter: blur(15px);
+        opacity: 0.1;
+      }
+    }
+
+    .file-meta {
+      flex: 1;
+      min-width: 0; // Essential for text-overflow to work
+      .file-name { 
+        font-size: 1rem; 
+        font-weight: 500; 
+        margin-bottom: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .file-stats {
+        display: flex;
+        gap: 10px;
+        font-size: 0.8rem;
+        color: $text-dim;
+      }
+    }
+
+    .download-btn {
+      background: transparent;
+      border: 1px solid $border;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      cursor: pointer;
+      &:hover { background: white; color: black; }
+    }
+  }
+}
+
+// --- RESPONSIVENESS ---
+
+// Tablets & Smaller Desktops
+@media (max-width: 1024px) {
+  .main-viewport {
+    padding: 40px 30px;
+  }
+}
+
+// Mobile Devices
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 12px;
+    align-items: stretch;
+  }
+
+  .glass-grid {
+    flex-direction: column;
+    height: auto;
+    border-radius: 24px;
+  }
+
+  .sidebar-nav {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid $border;
+    padding: 24px;
+
+    .brand { margin-bottom: 24px; }
+    
+    .nav-group {
+      flex-direction: row;
+      margin-bottom: 20px;
+      .nav-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 10px;
+        font-size: 0.85rem;
+      }
+    }
+
+    .primary-upload-btn {
+      margin-bottom: 20px;
+    }
+
+    .locker-info {
+      padding: 15px;
+    }
+  }
+
+  .main-viewport {
+    padding: 30px 20px;
+
+    .content-header {
+      margin-bottom: 30px;
+      h1 { font-size: 1.5rem; }
+    }
+
+    .file-item {
+      padding: 12px 16px;
+      gap: 12px;
+      
+      &:hover { transform: none; } // Disable translate on mobile for better UX
+
+      .file-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .file-meta .file-name {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

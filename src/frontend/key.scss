@@ -1,0 +1,113 @@
+// Colors & Variables
+$bg-color: #0a0a0a;
+$card-bg: #111111;
+$text-primary: #ffffff;
+$accent-green: #00ffaa;
+$border-color: #222222;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: $bg-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px; // Prevents card from touching screen edges on mobile
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background-color: $card-bg;
+  padding: 2.5rem;
+  border-radius: 28px;
+  border: 1px solid $border-color;
+  text-align: center;
+  
+  // RESPONSIVE LOGIC:
+  width: 100%; 
+  max-width: 440px; // Limits size on desktop
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .key-display {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px dashed $border-color;
+    border-radius: 16px;
+    padding: 1.2rem;
+    margin-bottom: 2rem;
+    word-break: break-all; // Ensures long keys don't overflow on small screens
+    
+    code {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 1.1rem;
+      color: $accent-green;
+      letter-spacing: 1px;
+    }
+  }
+
+  .dashboard-btn {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 12px;
+    border: none;
+    background-color: $text-primary;
+    color: #000;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+      transform: scale(0.98);
+    }
+  }
+}
+
+// Mobile Adjustments (Phones)
+@media (max-width: 480px) {
+  .card {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+
+    .title {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .key-display {
+      padding: 1rem;
+      
+      code {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
