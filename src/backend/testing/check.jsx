@@ -29,7 +29,7 @@ const Check = () => {
     formData.append("file", file); 
 
     try {
-      const res = await fetch("http://localhost:8081/check", {
+      const res = await fetch("https://flashvault-production.up.railway.app/check", {
         method: "POST",
         body: formData,
         // IMPORTANT: Do NOT set Content-Type header manually. 
