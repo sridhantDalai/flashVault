@@ -2,9 +2,9 @@
 const express = require("express")
 const router = express.Router()
 
-const {checkApp} = require("./testing/check.js")
-const upload = require("./testing/middlewareMulter.js")
+const { UploadController } = require("./uploads/upload.controller.js")
+const upload = require("./uploads/upload.maltar.js")
 
-router.post("/check", upload.single("file") , checkApp )
+router.post("/check", upload.single("file") , UploadController )
 
 module.exports = router
