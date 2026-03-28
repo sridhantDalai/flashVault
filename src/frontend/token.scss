@@ -1,0 +1,101 @@
+// Variables for consistency
+$bg-color: #0a0a0a;
+$card-bg: #1a1a1a;
+$accent-color: #00ffcc; // Matches the '+' icon green from your image
+$text-primary: #ffffff;
+$text-secondary: #888888;
+$input-border: #333333;
+
+.token-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: $bg-color;
+  font-family: 'Inter', sans-serif;
+  padding: 20px;
+}
+
+.token-card {
+  background-color: $card-bg;
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  .token-heading {
+    color: $text-primary;
+    font-size: 2rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .token-subtext {
+    color: $text-secondary;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+  }
+}
+
+.input-wrapper {
+  margin-bottom: 24px;
+
+  .token-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px dashed $input-border; // Dashed style like the upload box
+    border-radius: 12px;
+    padding: 16px;
+    color: $text-primary;
+    text-align: center;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+
+    &:focus {
+      border-color: $accent-color;
+      background: rgba(0, 255, 204, 0.05);
+    }
+
+    &::placeholder {
+      color: #555555;
+    }
+  }
+}
+
+.token-button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background-color: $text-primary;
+  color: $bg-color;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    background-color: #00ffcc;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Responsiveness
+@media (max-width: 480px) {
+  .token-card {
+    padding: 30px 20px;
+    
+    .token-heading {
+      font-size: 1.5rem;
+    }
+  }
+}

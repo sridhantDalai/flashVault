@@ -5,6 +5,8 @@ import Check from './backend/testing/check.jsx'
 import Dashboard from './frontend/dashboard.jsx'
 import Key from './frontend/key.jsx'
 import Upload from './frontend/upload.jsx'
+import Auth from './frontend/auth.jsx'
+import Token from './frontend/token.jsx'
 
 function App() {
 
@@ -15,6 +17,8 @@ function App() {
         <Route path='/check' element={<Check/>} />
         <Route path='/key' element={<Key/>} />
         <Route path='/upload' element={<Upload/>} />
+        <Route path='/auth' element={<Auth/>} />
+        <Route path='/token' element={<Token/>} />
        </Routes>
     </>
   )
