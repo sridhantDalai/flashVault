@@ -1,0 +1,39 @@
+
+a application 
+where i log in using once using g mail 
+then i will be assign a locker room number very qnique 
+then i go someone computer where i dont want to share my gmail or number anything like that 
+i just enter my locker room number and opens a file to upload
+where i will be able to send files + documents basically anything 
+in that locker room number only 
+and after sending one batch of files basically one operations 
+it will automatically only log out 
+no need of te tension of manual log out 
+again u want to send or share file 
+just enter locker room number 
+and 
+valla 
+u are aalowed to perfom again 1 operation and again log out 
+
+
+--------------------
+professional 
+---------------------
+This application enables users to transfer files quickly using a 
+unique locker room system.
+A user logs in once using their Google account. After logging in, 
+they are assigned a unique locker room number. 
+This locker room acts as a temporary space where files can be uploaded.
+On any other computer, the user can simply enter the locker room number 
+to access the upload interface. 
+From there, they can send files, documents, or any 
+type of data into that locker room.
+Each access session allows only one operation (one batch of file uploads).
+ Once the operation is completed, the system automatically logs out the session.
+To perform another transfer, the user can re-enter the locker room 
+number and repeat the process, 
+again limited to a single operation followed by automatic logout.
+This system focuses on:
+Simple access using a unique locker room number
+One-time operation per session
+Automatic logout after each use
