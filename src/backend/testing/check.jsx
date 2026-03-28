@@ -3,6 +3,7 @@ import "./check.scss";
 
 const Check = () => {
   const [file, setFile] = useState(null);
+  const [isUploading, setIsUploading] = useState(false); // New state for loading 
   const fileInputRef = useRef(null);
 
   const handleFileChange = (e) => {
@@ -13,7 +14,10 @@ const Check = () => {
   };
 
   const onBtnClick = () => {
-    fileInputRef.current.click();
+    // Prevent clicking the dropzone while an upload is in progress
+    if (!isUploading) {
+      fileInputRef.current.click();
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -24,57 +28,65 @@ const Check = () => {
       return;
     }
 
+    setIsUploading(true); // Start loading UI [cite: 7, 10]
+
     const formData = new FormData();
-    // Ensure "file" matches upload.single("file") in your Node.js route
     formData.append("file", file); 
 
     try {
       const res = await fetch("https://flashvault-production.up.railway.app/check", {
         method: "POST",
         body: formData,
-        // IMPORTANT: Do NOT set Content-Type header manually. 
-        // The browser will set it to multipart/form-data with the boundary automatically.
       });
 
-      const data = await res.json(); // Changed to .json() for better handling
+      const data = await res.json();
       console.log("Response from server:", data);
       
       if(res.ok) {
         alert("Upload successful!");
-        setFile(null); // Clear the file after success
+        setFile(null); 
+      } else {
+        alert("Upload failed: " + data.message);
       }
     } catch (err) {
       console.error("Error during upload:", err);
+      alert("Network error. Please try again.");
+    } finally {
+      setIsUploading(false); // Stop loading UI regardless of success or failure 
     }
   };
 
   return (
     <div className='checkScreen'>
-      {/* Cleaned up form attributes */}
-      <form 
-        className="uploadCard" 
-        onSubmit={handleSubmit} 
-      >
+      <form className="uploadCard" onSubmit={handleSubmit}>
         <h1>Upload File</h1>
         <p>Testing Multer Upload</p>
         
-        <div className="dropZone" onClick={onBtnClick}>
+        <div className={`dropZone ${isUploading ? 'disabled' : ''}`} onClick={onBtnClick}>
           <input 
             type="file" 
             name="file" 
             ref={fileInputRef} 
             onChange={handleFileChange} 
             hidden 
+            disabled={isUploading}
           />
           <div className="icon">＋</div>
           <span>{file ? file.name : "Click to select"}</span>
         </div>
 
         {file && (
-          <button type="submit" className="uploadBtn">
-            Check Now
+          <button 
+            type="submit" 
+            className="uploadBtn" 
+            disabled={isUploading} // Disable button while uploading
+          >
+            {isUploading ? "WAIT Uploading..." : "Check Now"}
           </button>
         )}
+
+        {/* Optional status text */}
+        {isUploading && <p className="status">Please wait, your file is being sent...</p>}
       </form>
     </div>
   );
