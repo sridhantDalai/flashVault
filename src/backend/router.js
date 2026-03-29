@@ -16,7 +16,7 @@ router.get("/auth/google/callback",
         failureRedirect: "/",
     }),
     (req, res) => {
-        res.redirect("http://localhost:5173/key");
+        res.redirect("https://flash-vault-beta.vercel.app/key");
     }
 )
 

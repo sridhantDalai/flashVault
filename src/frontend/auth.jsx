@@ -4,7 +4,7 @@ import './auth.scss';
 const Auth = () => {
 
   const handleLogin = () => {
-  window.open("http://localhost:8081/auth/google", "_self");
+  window.open("https://flashvault-production.up.railway.app/auth/google", "_self");
   };
 
   return (
