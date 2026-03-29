@@ -12,5 +12,10 @@ const cloudName = process.env.CLOUD_NAME
 const apiKey = process.env.API_KEY
 const apiSecrect = process.env.API_SECRECT
 
+const mongooseURI = process.env.MONGOOSE_URI
 
-module.exports = {show,PORT,UI_PORT,cloudName,apiKey,apiSecrect}
+const clientID = process.env.CLIENT_ID
+const clientSec = process.env.CLIENT_SECRET
+const sessionID = process.env.SESSION_ID
+
+module.exports = {show,PORT,UI_PORT,cloudName,apiKey,apiSecrect,mongooseURI,clientID,clientSec,sessionID}

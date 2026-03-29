@@ -17,7 +17,7 @@ function App() {
         <Route path='/check' element={<Check/>} />
         <Route path='/key' element={<Key/>} />
         <Route path='/upload' element={<Upload/>} />
-        <Route path='/auth' element={<Auth/>} />
+        <Route path='/' element={<Auth/>} />
         <Route path='/token' element={<Token/>} />
        </Routes>
     </>

@@ -2,6 +2,11 @@ import React from 'react';
 import './auth.scss';
 
 const Auth = () => {
+
+  const handleLogin = () => {
+  window.open("http://localhost:8081/auth/google", "_self");
+  };
+
   return (
     <div className="auth-container">
       <div className="auth-card">
@@ -22,7 +27,7 @@ const Auth = () => {
           </div>
         </div>
 
-        <button className="google-btn">
+        <button onClick={handleLogin} className="google-btn">
           Using GOOGLE
         </button>
       </div>
