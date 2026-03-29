@@ -9,6 +9,7 @@ passport.use(new GoogleStrategy({
     clientID : clientID,
     clientSecret : clientSec,
     callbackURL: "https://flashvault-production.up.railway.app/auth/google/callback",
+    proxy: true
     }
     ,
     async (accessToken, refreshToken, profile, done) => {
