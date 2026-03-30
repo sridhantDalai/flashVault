@@ -11,10 +11,12 @@ const passport = require("./auth/auth.controller.js")
 
 
 const coresOption = {
-    origin : "*",
+    origin : "https://flash-vault-beta.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials : true,
 }
+
+app.set("trust proxy", 1);
 
 app.use(cors(coresOption))
 app.use(express.json())
@@ -26,6 +28,10 @@ app.use(session({
     secret: sessionID,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+        secure: true,       
+        sameSite: "none",    
+    }
 }))
 
 app.use(passport.initialize())
