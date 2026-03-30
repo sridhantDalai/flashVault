@@ -6,6 +6,7 @@ const { UploadController } = require("./uploads/upload.controller.js")
 const upload = require("./uploads/upload.maltar.js")
 const createUser = require("./database/db.controller.js")
 const passport = require("./auth/auth.controller.js")
+const { show } = require("./components.js")
 
 router.get("/auth/google",
     passport.authenticate("google", { scope: ["profile", "email"] })
@@ -21,6 +22,7 @@ router.get("/auth/google/callback",
 )
 
 router.get("/me" , (req,res) => {
+    show(req.user)
     if (req.isAuthenticated){
         return (
             res.json({
