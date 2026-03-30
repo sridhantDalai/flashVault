@@ -20,6 +20,23 @@ router.get("/auth/google/callback",
     }
 )
 
+router.get("/me" , (req,res) => {
+    if (req.isAuthenticated){
+        return (
+            res.json({
+                loggedIn : true ,
+                user : req.user
+            })
+        )
+    }else{
+        return(
+            res.status(401).json({
+                loggedIn : false
+            })
+        )
+    }
+})
+
 router.post("/check", upload.single("file") , UploadController )
 router.post("/db" , createUser )
 

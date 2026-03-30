@@ -1,13 +1,25 @@
-import React from 'react';
+import {useEffect} from 'react';
 import './key.scss';
 
 import { useNavigate } from "react-router-dom";
 
 function Key() {
-  const envKey = "4A2B-91X7-KL09-PROX"; // Placeholder key
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await fetch("http://localhost:8081/me", {
+        credentials : "include"
+      })
+
+      const data = await res.json()
+      localStorage.setItem("user",JSON.stringify(data.user))
+    }
+
+    fetchUser()
+  }, [])
+
+  const envKey = "4A2B-91X7-KL09-PROX";
   const navigate = useNavigate()
-
   const handleDashboard = () => {
     navigate("/dashboard")
   }
