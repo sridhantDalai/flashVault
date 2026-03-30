@@ -18,6 +18,9 @@ const Dashboard = () => {
     { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
   ]);
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user)
+
   const navigate = useNavigate()
   
   const handleUpload = () => {
