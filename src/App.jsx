@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import Check from './backend/testing/check.jsx'
 import Dashboard from './frontend/dashboard.jsx'
 import Key from './frontend/key.jsx'
 import Upload from './frontend/upload.jsx'
 import Auth from './frontend/auth.jsx'
 import Token from './frontend/token.jsx'
+import Load from './frontend/load.jsx'
 import { ProtectedRoute } from './frontend/components.jsx'
 
 function App() {
@@ -35,6 +35,7 @@ function App() {
         } />
 
         <Route path='/' element={<Auth/>} />
+        <Route path='/load' element={<Load/>} />
 
         <Route path='/token' element={
             <ProtectedRoute>

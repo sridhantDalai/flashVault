@@ -5,19 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 function Key() {
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const res = await fetch("https://flashvault-production.up.railway.app/me", {
-        credentials : "include"
-      })
-
-      const data = await res.json()
-      localStorage.setItem("user",JSON.stringify(data.user))
-    }
-
-    fetchUser()
-  }, [])
-
   const envKey = "4A2B-91X7-KL09-PROX";
   const navigate = useNavigate()
   const handleDashboard = () => {
