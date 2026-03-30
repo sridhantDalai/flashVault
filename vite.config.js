@@ -6,15 +6,6 @@ export default defineConfig({
 
   server: {
     host: true,
-    allowedHosts: [
-      ".ngrok-free.dev"
-    ]
-  },
-
-  build: {
-    rollupOptions: {
-      // 🔥 backend / node-only modules ignore karo
-      external: ["dotenv"]
-    }
+    allowedHosts: [".ngrok-free.dev"]
   }
 })
