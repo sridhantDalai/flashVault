@@ -1,7 +1,6 @@
 import {useEffect} from 'react'
 import "./load.scss"
 import { useNavigate } from 'react-router-dom'
-import { show } from '../backend/components.js'
 
 const Load = () => {
   const navigate = useNavigate()
@@ -14,7 +13,7 @@ const Load = () => {
       if(!res.ok){return navigate("/")}
 
       const data = await res.json()
-      show(data)
+      console.log(data)
       localStorage.setItem("user",JSON.stringify(data.user))
 
       navigate("/key")
