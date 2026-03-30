@@ -70,7 +70,7 @@ const Dashboard = () => {
         <main className="main-viewport">
           <header className="content-header">
             <div>
-              <h1>Recent Files</h1>
+              <h1>Welcome {user?.name}</h1>
               <p className="subtitle">Manage your temporary transfers</p>
             </div>
             <div className="user-profile">
