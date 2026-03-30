@@ -2,7 +2,7 @@
 
 const checkAuth = async () => {
     try{
-        const res = await fetch("http://localhost:8081/me" , {
+        const res = await fetch("https://flashvault-production.up.railway.app/me" , {
         credentials : "include",
     })
 

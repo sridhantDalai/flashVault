@@ -7,7 +7,7 @@ function Key() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch("http://localhost:8081/me", {
+      const res = await fetch("https://flashvault-production.up.railway.app/me", {
         credentials : "include"
       })
 
