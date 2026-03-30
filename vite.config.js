@@ -3,10 +3,18 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+
   server: {
     host: true,
     allowedHosts: [
-      ".ngrok-free.dev"   // ✅ THIS IS THE REAL FIX
+      ".ngrok-free.dev"
     ]
+  },
+
+  build: {
+    rollupOptions: {
+      // 🔥 backend / node-only modules ignore karo
+      external: ["dotenv"]
+    }
   }
 })
