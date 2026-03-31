@@ -3,6 +3,7 @@ const passport = require("passport");
 const { clientID, clientSec, show } = require("../components");
 const userModel = require("../database/db.schema");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const { customAlphabet } = require('nanoid');
 
 passport.use(new GoogleStrategy({
     
@@ -23,13 +24,22 @@ passport.use(new GoogleStrategy({
             const date = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
             const formatted = `${time} ${day} ${date}`;
 
+            //envkey
+            const generateENVKey = customAlphabet(
+                'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*',
+                8)
+
+            const generateLockerRoomKey = customAlphabet(
+                'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*',
+                5)                
+
             if (!user){
                 user = await userModel.create({
                     email : profile.emails[0].value,
                     name : profile.displayName,
-                    envKey : "default",
+                    envKey : generateENVKey(),
                     dateCreated : formatted,
-                    lockerRoom : "#101"   
+                    lockerRoom : generateLockerRoomKey()   
                 })
             }
 
