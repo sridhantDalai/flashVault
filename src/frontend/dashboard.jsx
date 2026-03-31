@@ -114,7 +114,7 @@ const isImage = (file) => {
           </header>
 
                 <div className="files-grid">
-                  {[...files].reverse().map((file, index) => {
+                  {[...files].map((file, index) => {
                     const fileName = `file${index + 1}.${file.format}`;
 
                     return (
