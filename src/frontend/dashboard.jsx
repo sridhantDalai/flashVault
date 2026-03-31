@@ -115,7 +115,7 @@ const isImage = (file) => {
 
                 <div className="files-grid">
                   {[...files].map((file, index) => {
-                    const fileName = `file${index + 1}.${file.format}`;
+                    const fileName = `file${files.length - index}.${file.format}`;
 
                     return (
                       <div key={file.public_id} className="file-item">
