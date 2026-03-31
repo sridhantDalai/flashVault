@@ -23,7 +23,7 @@ router.get("/auth/google/callback",
 
 router.get("/me" , (req,res) => {
     show(req.user)
-    if (req.isAuthenticated){
+    if (req.isAuthenticated()){
         return (
             res.json({
                 loggedIn : true ,
