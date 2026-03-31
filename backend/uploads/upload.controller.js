@@ -1,4 +1,5 @@
 // checkApp.js
+const { show } = require("../components.js");
 const cloudinary = require("./upload.cloudinary.js"); // Fixed typo in filename
 const fs = require("fs");
 
@@ -7,6 +8,7 @@ const UploadController = async (req, res) => {
         const file = req.file;
         const username = req.body.username || "default";
 
+        show(req.body.username)
         if (!file) {
             return res.status(400).json({ message: "No file uploaded" });
         }
