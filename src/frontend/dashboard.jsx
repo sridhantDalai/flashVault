@@ -113,38 +113,47 @@ const isImage = (file) => {
             </div>
           </header>
 
-          <div className="files-grid">
-            {files.map(file => (
-              <div key={file.id} className="file-item">
-                <div className="file-icon">
-                  <span className="glow-effect"></span>
-                  {isImage(file) ? (
-                                <img 
-                                  src={file.secure_url} 
-                                  alt="file" 
-                                  className="file-preview"
-                                />
-                              ) : (
-                                <div className="file-placeholder"></div>
-                              )}
-                </div>
-                <div className="file-meta">
-                  <h3 className="file-name">{file.public_id}</h3>
-                  <div className="file-stats">
-                    <span className="dot">•</span>
-                  </div>
-                </div>
-                <button className="download-btn">↓</button>
+                <div className="files-grid">
+                  {[...files].reverse().map((file, index) => {
+                    const fileName = `file${index + 1}.${file.format}`;
 
-                <div className="file-actions">
-                  <button className="delete-btn" onClick={() => handleDelete(file.public_id)}>
-                    <span className="icon">🗑</span>
-                  </button>
-                </div>
+                    return (
+                      <div key={file.public_id} className="file-item">
+                        <div className="file-icon">
+                          <span className="glow-effect"></span>
 
-              </div>
-            ))}
-          </div>
+                          {isImage(file) ? (
+                            <img 
+                              src={file.secure_url} 
+                              alt="file" 
+                              className="file-preview"
+                            />
+                          ) : (
+                            <div className="file-placeholder"></div>
+                          )}
+                        </div>
+
+                        <div className="file-meta">
+                          <h3 className="file-name">{fileName}</h3>
+                          <div className="file-stats">
+                            <span className="dot">•</span>
+                          </div>
+                        </div>
+
+                        <button className="download-btn">↓</button>
+
+                        <div className="file-actions">
+                          <button
+                            className="delete-btn"
+                            onClick={() => handleDelete(file.public_id)}
+                          >
+                            <span className="icon">🗑</span>
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
         </main>
 
       </div>
