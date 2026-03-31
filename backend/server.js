@@ -24,19 +24,18 @@ app.use(express.urlencoded({ extended: true }));
 
 connectDB()
 
-app.set("trust proxy", 1);
 
 app.use(session({
 secret: sessionID,
-    resave: false,
+    resave: true,              // Isko true kar de temporarily
     saveUninitialized: false,
-    proxy: true, // Railway/Vercel ke liye proxy enable karna padta hai
+    proxy: true,               // Railway ke liye mandatory
     cookie: {
-        secure: true,       
-        sameSite: "none", // Cross-site cookies ke liye mandatory hai
-        httpOnly: true,    // Security ke liye
-        maxAge: 24 * 60 * 60 * 1000
-    } // 24 hours
+        secure: true,          // HTTPS pe ho toh true hi rahega
+        sameSite: "none",      // Cross-domain ke liye "none" zaroori hai
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 
+    }
 }))
 
 app.use(passport.initialize())
