@@ -15,9 +15,12 @@ router.get("/auth/google",
 router.get("/auth/google/callback",
 passport.authenticate("google", { failureRedirect: "/" }),
     (req, res) => {
-        // Session save confirm karne ke liye callback use kar
+        // Session save hone ka wait kar, phir redirect kar
         req.session.save((err) => {
-            if (err) return res.redirect("/");
+            if (err) {
+                console.error("Session Save Error:", err);
+                return res.redirect("/");
+            }
             res.redirect("https://flash-vault-beta.vercel.app/load");
         });
     }

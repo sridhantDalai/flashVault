@@ -24,6 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 
 connectDB()
 
+app.set("trust proxy", 1);
+
 app.use(session({
 secret: sessionID,
     resave: false,
