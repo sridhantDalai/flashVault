@@ -62,7 +62,7 @@ const Dashboard = () => {
           
           <div className="locker-info">
              <p className="label">Locker Room</p>
-             <p className="id">#88219</p>
+             <p className="id">{user?.lockerRoom}</p>
           </div>
         </aside>
 
@@ -70,7 +70,7 @@ const Dashboard = () => {
         <main className="main-viewport">
           <header className="content-header">
             <div>
-              <h1>Welcome {user?.name}</h1>
+              <h1>Welcome<br/>{user?.name}</h1>
               <p className="subtitle">Manage your temporary transfers</p>
             </div>
             <div className="user-profile">
