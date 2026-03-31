@@ -10,7 +10,7 @@ const Dashboard = () => {
   useEffect(() => {
   const fetchImages = async () => {
     try {
-      const res = await fetch("flashvault-production.up.railway.app/getImg");
+      const res = await fetch("https://flashvault-production.up.railway.app/getImg");
       const data = await res.json();
 
       setFiles(data); // direct set
