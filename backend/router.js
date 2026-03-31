@@ -8,6 +8,7 @@ const createUser = require("./database/db.controller.js")
 const passport = require("./auth/auth.controller.js")
 const { show } = require("./components.js")
 const { getImages } = require("./retrive/retrive.controller.js")
+const { deleteImage } = require("./delete/delete.controller.js")
 
 router.get("/auth/google",
     passport.authenticate("google", { scope: ["profile", "email"] })
@@ -47,6 +48,7 @@ router.get("/me" , (req,res) => {
 
 router.post("/check", upload.single("file") , UploadController )
 router.get("/getImg",getImages)
+router.delete("/delete",deleteImage)
 router.post("/db" , createUser )
 
 module.exports = router

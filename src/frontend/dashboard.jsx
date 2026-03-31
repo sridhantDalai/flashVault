@@ -22,6 +22,32 @@ const Dashboard = () => {
   fetchImages();
 }, []);
 
+  const handleDelete = async (public_id) => {
+  try {
+    const res = await fetch(
+      "https://flashvault-production.up.railway.app/api/deleteImg",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ public_id }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (data.success) {
+      // remove from UI
+      setFiles((prev) =>
+        prev.filter((file) => file.public_id !== public_id)
+      );
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
   const user = JSON.parse(localStorage.getItem("user"));
   console.log(user)
 
@@ -106,7 +132,7 @@ const Dashboard = () => {
                 <button className="download-btn">↓</button>
 
                 <div className="file-actions">
-                  <button className="delete-btn">
+                  <button className="delete-btn" onClick={() => handleDelete(file.public_id)}>
                     <span className="icon">🗑</span>
                   </button>
                 </div>
