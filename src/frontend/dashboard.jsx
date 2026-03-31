@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import './dashboard.scss';
 
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   // Mock data for files
-  const [files, setFiles] = useState([
-    { id: 1, name: "Project_Final.zip", size: "12.4 MB", date: "2 mins ago" },
-    { id: 2, name: "Invoice_March.pdf", size: "1.2 MB", date: "1 hour ago" },
-    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
-    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
-    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
-    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
-    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
-    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
-    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
-    { id: 3, name: "Asset_3.png", size: "4.5 MB", date: "Yesterday" },
-  ]);
+  const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+  const fetchImages = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/images");
+      const data = await res.json();
+
+      setFiles(data); // direct set
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchImages();
+}, []);
 
   const user = JSON.parse(localStorage.getItem("user"));
   console.log(user)
@@ -83,14 +87,20 @@ const Dashboard = () => {
               <div key={file.id} className="file-item">
                 <div className="file-icon">
                   <span className="glow-effect"></span>
-                  📄
+                  {/* ---- */}
+                  <img 
+                    src={file.secure_url} 
+                    alt="file" 
+                    width="60" 
+                    height="60"
+                    style={{ objectFit: "cover", borderRadius: "8px" }}
+                  />
+                  {/* ------ */}
                 </div>
                 <div className="file-meta">
-                  <h3 className="file-name">{file.name}</h3>
+                  <h3 className="file-name">{file.public_id}</h3>
                   <div className="file-stats">
-                    <span>{file.size}</span>
                     <span className="dot">•</span>
-                    <span>{file.date}</span>
                   </div>
                 </div>
                 <button className="download-btn">↓</button>
