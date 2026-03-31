@@ -136,7 +136,6 @@ const isImage = (file) => {
                         <div className="file-meta">
                           <h3 className="file-name">{fileName}</h3>
                           <div className="file-stats">
-                            <span className="dot">•</span>
                           </div>
                         </div>
 
