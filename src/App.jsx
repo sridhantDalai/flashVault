@@ -8,6 +8,8 @@ import Auth from './frontend/auth.jsx'
 import Token from './frontend/token.jsx'
 import Load from './frontend/load.jsx'
 import { ProtectedRoute } from './frontend/components.jsx'
+import Env from './frontend/env.jsx'
+import DashboardTemp from './frontend/dashboardTemp.jsx'
 
 function App() {
 
@@ -42,6 +44,10 @@ function App() {
               <Token/>
             </ProtectedRoute>          
         } />
+
+         {/* env LOG IN */}
+         <Route path='/env' element={<Env/>} />
+         <Route path='/dashboardTemp' element={<DashboardTemp/>} />
 
        </Routes>
     </>

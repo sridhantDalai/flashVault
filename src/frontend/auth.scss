@@ -3,28 +3,45 @@ $bg-color: #0a0a0a;
 $card-bg: #141414;
 $text-primary: #ffffff;
 $text-secondary: #888888;
-$accent-color: #00ffa3; // The teal/green from your + icon
+$accent-color: #00ffa3;
 $btn-white: #ffffff;
+
+.auth-page-wrapper {
+  background-color: $bg-color;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; // Centers the container in the viewport
+  padding: 20px;
+}
 
 .auth-container {
   display: flex;
+  gap: 32px;
+  flex-direction: row;
+  align-items: center; // THIS is what centers the 2nd card vertically against the 1st
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: $bg-color;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  padding: 20px;
+  max-width: 900px;
+  width: 100%;
 }
 
 .auth-card {
   background-color: $card-bg;
-  width: 100%;
-  max-width: 400px;
+  flex: 1;
   padding: 40px 30px;
   border-radius: 24px;
   text-align: center;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  
+  // Highlighting the 2nd card slightly differently if you want
+  &.secondary-card {
+    background-color: rgba($card-bg, 0.8);
+    padding: 30px;
+    max-width: 350px; // Keeps it from getting too wide
+  }
 
   .auth-heading {
     color: $text-primary;
@@ -32,6 +49,11 @@ $btn-white: #ffffff;
     font-weight: 700;
     margin-bottom: 8px;
     letter-spacing: -0.5px;
+
+    &.secondary {
+      font-size: 1.4rem;
+      line-height: 1.2;
+    }
   }
 
   .auth-subtext {
@@ -58,36 +80,53 @@ $btn-white: #ffffff;
   }
 }
 
-.google-btn {
+.google-btn, .env-btn {
   width: 100%;
   padding: 14px;
   border-radius: 12px;
   border: none;
-  background-color: $btn-white;
-  color: #000;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.google-btn {
+  background-color: $btn-white;
+  color: #000;
 
   &:hover {
-    opacity: 0.9;
+    background-color: $accent-color;
     transform: translateY(-1px);
-    background-color: #00ffa3;
   }
+}
 
-  &:active {
-    transform: translateY(0);
+.env-btn {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: $text-primary;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: $accent-color;
+    color: $accent-color;
   }
 }
 
 // Responsive adjustments
-@media (max-width: 480px) {
-  .auth-card {
-    padding: 30px 20px;
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
   
-  .auth-heading {
-    font-size: 1.5rem;
+  .auth-card {
+    width: 100%;
+    max-width: 400px;
+    
+    &.secondary-card {
+      max-width: 400px;
+    }
   }
 }
