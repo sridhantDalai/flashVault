@@ -25,13 +25,16 @@ app.use(express.urlencoded({ extended: true }));
 connectDB()
 
 app.use(session({
-    secret: sessionID,
+secret: sessionID,
     resave: false,
     saveUninitialized: false,
+    proxy: true, // Railway/Vercel ke liye proxy enable karna padta hai
     cookie: {
         secure: true,       
-        sameSite: "none",    
-    }
+        sameSite: "none", // Cross-site cookies ke liye mandatory hai
+        httpOnly: true,    // Security ke liye
+        maxAge: 24 * 60 * 60 * 1000
+    } // 24 hours
 }))
 
 app.use(passport.initialize())

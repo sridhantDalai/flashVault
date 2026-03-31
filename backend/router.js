@@ -13,11 +13,13 @@ router.get("/auth/google",
 )
 
 router.get("/auth/google/callback",
-    passport.authenticate("google", {
-        failureRedirect: "/",
-    }),
+passport.authenticate("google", { failureRedirect: "/" }),
     (req, res) => {
-        res.redirect("https://flash-vault-beta.vercel.app/load");
+        // Session save confirm karne ke liye callback use kar
+        req.session.save((err) => {
+            if (err) return res.redirect("/");
+            res.redirect("https://flash-vault-beta.vercel.app/load");
+        });
     }
 )
 
