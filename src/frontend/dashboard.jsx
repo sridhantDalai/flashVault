@@ -22,6 +22,11 @@ const Dashboard = () => {
   fetchImages();
 }, []);
 
+const isImage = (file) => {
+  const imageFormats = ["jpg", "jpeg", "png", "webp", "gif"];
+  return imageFormats.includes(file.format);
+};
+
   const handleDelete = async (public_id) => {
   try {
     const res = await fetch(
@@ -113,15 +118,15 @@ const Dashboard = () => {
               <div key={file.id} className="file-item">
                 <div className="file-icon">
                   <span className="glow-effect"></span>
-                  {/* ---- */}
-                  <img 
-                    src={file.secure_url} 
-                    alt="file" 
-                    width="60" 
-                    height="60"
-                    style={{ objectFit: "cover", borderRadius: "8px" }}
-                  />
-                  {/* ------ */}
+                  {isImage(file) ? (
+                                <img 
+                                  src={file.secure_url} 
+                                  alt="file" 
+                                  className="file-preview"
+                                />
+                              ) : (
+                                <div className="file-placeholder"></div>
+                              )}
                 </div>
                 <div className="file-meta">
                   <h3 className="file-name">{file.public_id}</h3>

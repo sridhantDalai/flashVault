@@ -261,6 +261,25 @@ $border: rgba(255, 255, 255, 0.06);
   }
 }
 
+// later 
+.file-preview {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.file-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+
+  background-image: url("../assets/Group\ 2.png"); // apna custom image
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; // ya cover (depends design pe)
+}
+
 // --- RESPONSIVENESS ---
 @media (max-width: 1024px) {
   .main-viewport {
