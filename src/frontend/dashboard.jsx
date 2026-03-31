@@ -53,6 +53,23 @@ const isImage = (file) => {
   }
 };
 
+  const handleDownload = async (url, name) => {
+    try {
+      const res = await fetch(url);
+      const blob = await res.blob();
+
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = name;
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (err) {
+      console.error("Download failed:", err);
+    }
+  };
+
   const user = JSON.parse(localStorage.getItem("user"));
   console.log(user)
 
@@ -139,7 +156,8 @@ const isImage = (file) => {
                           </div>
                         </div>
 
-                        <button className="download-btn">↓</button>
+                        <button onClick={() => handleDownload(file.secure_url, fileName)}
+                         className="download-btn">↓</button>
 
                         <div className="file-actions">
                           <button
