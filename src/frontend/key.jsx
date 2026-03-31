@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function Key() {
 
-  const envKey = "4A2B-91X7-KL09-PROX";
+  const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate()
   const handleDashboard = () => {
     navigate("/dashboard")
@@ -17,7 +17,7 @@ function Key() {
         <h1 className="title">YOUR ENVIRONMENT KEY</h1>
         
         <div className="key-display">
-          <code>{envKey}</code>
+          <code>{user?.envKey}</code>
         </div>
 
         <button onClick={handleDashboard} className="dashboard-btn" >
