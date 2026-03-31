@@ -25,7 +25,7 @@ const Dashboard = () => {
   const handleDelete = async (public_id) => {
   try {
     const res = await fetch(
-      "https://flashvault-production.up.railway.app/api/deleteImg",
+      "https://flashvault-production.up.railway.app/api/delete",
       {
         method: "DELETE",
         headers: {
