@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const DashboardTemp = () => {
   const [files, setFiles] = useState([]);
   // Initial 5 minutes in seconds (300)
-  const [timeLeft, setTimeLeft] = useState(300);
+  const [timeLeft, setTimeLeft] = useState(5);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -22,12 +22,16 @@ const DashboardTemp = () => {
 
   // Timer Logic
   useEffect(() => {
+
+
     if (timeLeft <= 0) return;
     const timer = setInterval(() => {
       setTimeLeft((prev) => prev - 1);
     }, 1000);
+
     return () => clearInterval(timer);
   }, [timeLeft]);
+
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -73,6 +77,10 @@ const DashboardTemp = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
+
+  if(timeLeft <= 0){
+    navigate("/env", { replace: true })
+  }
   
   const handleUpload = () => navigate("/upload");
   const handleKey = () => navigate("/key");
