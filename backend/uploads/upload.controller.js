@@ -50,6 +50,7 @@ const UploadControllerTemp = async (req, res) => {
         const file = req.file;
         //const username = req.body.username || "tempUser";
         const username = JSON.parse(localStorage.getItem("user"))
+        console.log(username)
 
         if (!file) {
                     return res.status(400).json({ 
@@ -62,18 +63,18 @@ const UploadControllerTemp = async (req, res) => {
             folder: `Uploads/${username.envKey}`,
         });
 
-        res.status(200).json({
-            success: true,
-            url: result.secure_url,
-            username : username.envKey,
-        });
+        // res.status(200).json({
+        //     success: true,
+        //     url: result.secure_url,
+        //     username : username.envKey,
+        // });
 
     } catch (err) {
         console.log(err);
-        res.status(500).json({ 
-            message: "Code 500: Error uploading file",
-            place : username.envKey
-        });
+        // res.status(500).json({ 
+        //     message: "Code 500: Error uploading file",
+        //     place : username.envKey
+        // });
     }
 };
 
