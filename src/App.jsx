@@ -7,9 +7,10 @@ import Upload from './frontend/upload.jsx'
 import Auth from './frontend/auth.jsx'
 import Token from './frontend/token.jsx'
 import Load from './frontend/load.jsx'
-import { ProtectedRoute } from './frontend/components.jsx'
+import { ProtectedRoute, ProtectedRouteTemp } from './frontend/components.jsx'
 import Env from './frontend/env.jsx'
 import DashboardTemp from './frontend/dashboardTemp.jsx'
+import LoadTemp from './frontend/loadTemp.jsx'
 
 function App() {
 
@@ -47,7 +48,14 @@ function App() {
 
          {/* env LOG IN */}
          <Route path='/env' element={<Env/>} />
-         <Route path='/dashboardTemp' element={<DashboardTemp/>} />
+
+         <Route path='/dashboardTemp' element={
+           <ProtectedRouteTemp>
+              <DashboardTemp/>
+           </ProtectedRouteTemp>
+          } />
+
+         <Route path='/loadTemp' element={<LoadTemp/>} />
 
        </Routes>
     </>

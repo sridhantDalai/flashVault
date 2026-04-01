@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const DashboardTemp = () => {
   const [files, setFiles] = useState([]);
   // Initial 5 minutes in seconds (300)
-  const [timeLeft, setTimeLeft] = useState(5);
+  const [timeLeft, setTimeLeft] = useState(10);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -79,7 +79,10 @@ const DashboardTemp = () => {
   const navigate = useNavigate();
 
   if(timeLeft <= 0){
-    navigate("/env", { replace: true })
+    navigate("/loadTemp", {
+      replace: true,
+      state: { type: "logout" }
+    })
   }
   
   const handleUpload = () => navigate("/upload");
@@ -125,6 +128,9 @@ const DashboardTemp = () => {
                 <span className="timer-icon">⏳</span>
                 <span className="timer-text">{formatTime(timeLeft)}</span>
                 <div className="timer-progress" style={{ width: `${(timeLeft / 300) * 100}%` }}></div>
+                <p className="logout-text" style={{ fontSize: '0.8rem', marginTop: '5px', opacity: 0.8 }}>
+                You will Log out in
+              </p>
             </div>
           </header>
 

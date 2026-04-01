@@ -13,6 +13,9 @@ const EnvPage = () => {
     navigate("/");
   };
 
+  
+  console.log(sessionStorage.getItem("logIN"))
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,10 +39,11 @@ const EnvPage = () => {
       const data = await res.json();
 
       if (res.ok) {
-        // 🔥 success → navigate
-        navigate("/dashboardTemp", {
-          state: data.user
-        });
+        navigate("/loadTemp", {
+        replace: true,
+        state: { type: "loggedIn" }
+      })
+
       } else {
         setError(data.message || "Invalid Key");
       }
