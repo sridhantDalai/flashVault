@@ -48,8 +48,9 @@ const UploadController = async (req, res) => {
 const UploadControllerTemp = async (req, res) => {
     try {
         const file = req.file;
-        const username = req.body.username || "tempUser";
-        console.log("BODY:", req.body.username);
+        //const username = req.body.username || "tempUser";
+        const username = JSON.parse(localStorage.getItem("user"))
+        console.log("BODY:", username);
 
         if (!file) {
                     return res.status(400).json({ 
@@ -59,7 +60,7 @@ const UploadControllerTemp = async (req, res) => {
         const result = await cloudinary.uploader.upload(
             file.path, {
             resource_type: "auto",
-            folder: `Uploads/${username}`,
+            folder: `Uploads/${username.envKey}`,
         });
 
         res.status(200).json({
