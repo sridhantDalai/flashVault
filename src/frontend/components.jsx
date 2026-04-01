@@ -13,5 +13,6 @@ export const ProtectedRouteTemp = ({children}) => {
     const logIN = sessionStorage.getItem("loggedIn")
     if (logIN == null){
       return <Navigate to={"/env"} />
-    }    
+    }  
+    return children  
 }
