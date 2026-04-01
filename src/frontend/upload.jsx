@@ -22,16 +22,17 @@ const Upload = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!file) return;
 
-    if (!file) {
-      console.log("No file selected");
-      return;
-    }
+    setIsUploading(true);
 
-    setIsUploading(true); // Start loading UI [cite: 7, 10]
+    // Get user from localStorage on the FRONTEND
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const formData = new FormData();
-    formData.append("file", file); 
+    formData.append("file", file);
+    // Pass the envKey or user info here
+    formData.append("envKey", user?.envKey || "tempUser");
 
     try {
       const res = await fetch("https://flashvault-production.up.railway.app/checkTemp", {
