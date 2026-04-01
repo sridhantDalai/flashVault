@@ -45,4 +45,32 @@ const UploadController = async (req, res) => {
     }
 };
 
-module.exports = { UploadController };
+const UploadControllerTemp = async (req, res) => {
+    try {
+        const file = req.file;
+        const username = req.body.username || "tempUser";
+
+        if (!file) {
+                    return res.status(400).json({ 
+                        message: "No file uploaded" });
+                }
+
+        const result = await cloudinary.uploader.upload(
+            file.path, {
+            resource_type: "auto",
+            folder: `Uploads/${username}`,
+        });
+
+        res.status(200).json({
+            success: true,
+            url: result.secure_url
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Error aaya bhai" });
+    }
+};
+
+
+module.exports = { UploadController , UploadControllerTemp };

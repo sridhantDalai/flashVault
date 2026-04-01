@@ -34,7 +34,7 @@ const Upload = () => {
     formData.append("file", file); 
 
     try {
-      const res = await fetch("https://flashvault-production.up.railway.app/check", {
+      const res = await fetch("https://flashvault-production.up.railway.app/checkTemp", {
         method: "POST",
         body: formData,
       });

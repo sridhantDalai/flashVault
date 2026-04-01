@@ -2,7 +2,7 @@
 const express = require("express")
 const router = express.Router()
 
-const { UploadController } = require("./uploads/upload.controller.js")
+const { UploadController, UploadControllerTemp } = require("./uploads/upload.controller.js")
 const upload = require("./uploads/upload.maltar.js")
 const createUser = require("./database/db.controller.js")
 const passport = require("./auth/auth.controller.js")
@@ -48,6 +48,7 @@ router.get("/me" , (req,res) => {
 })
 
 router.post("/check", upload.single("file") , UploadController )
+router.post("/checkTemp", upload.single("file") , UploadControllerTemp )
 router.get("/getImg",getImages)
 router.delete("/delete",deleteImage)
 router.post("/db" , createUser )
