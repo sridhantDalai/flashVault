@@ -1,12 +1,17 @@
 // checkApp.js
 const { show } = require("../components.js");
+const userModel = require("../database/db.schema.js");
 const cloudinary = require("./upload.cloudinary.js"); // Fixed typo in filename
 const fs = require("fs");
 
 const UploadController = async (req, res) => {
     try {
         const file = req.file;
-        const username = req.body.username || "default";
+        const userId = req.user._id;
+        const user = await userModel.findById(userId)
+        const envKey = user.envKey;
+
+        const username = envKey;
 
         show(req.body.username)
         if (!file) {
