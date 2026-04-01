@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const DashboardTemp = () => {
   const [files, setFiles] = useState([]);
   // Initial 5 minutes in seconds (300)
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(300);
 
   useEffect(() => {
     const fetchImages = async () => {
