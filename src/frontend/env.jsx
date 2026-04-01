@@ -39,10 +39,14 @@ const EnvPage = () => {
       const data = await res.json();
 
       if (res.ok) {
-        navigate("/loadTemp", {
-        replace: true,
-        state: { type: "loggedIn" }
-      })
+        // 🔥 success → navigate
+        const wait = async () => {
+          await sessionStorage.setItem("loggedIn",true)
+          navigate("/dashboardTemp", {
+          state: data.user
+        });
+        }
+        wait()
 
       } else {
         setError(data.message || "Invalid Key");
