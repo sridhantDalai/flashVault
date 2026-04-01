@@ -49,6 +49,7 @@ const UploadControllerTemp = async (req, res) => {
     try {
         const file = req.file;
         const username = req.body.username || "tempUser";
+        console.log("BODY:", req.body);
 
         if (!file) {
                     return res.status(400).json({ 
