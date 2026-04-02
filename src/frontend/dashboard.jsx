@@ -8,16 +8,24 @@ const Dashboard = () => {
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
-  const fetchImages = async () => {
-    try {
-      const res = await fetch("https://flashvault-production.up.railway.app/getImg");
-      const data = await res.json();
+    const fetchImages = async () => {
+  try {
+    const envKey = JSON.parse(localStorage.getItem("user"))?.envKey;
 
-      setFiles(data); // direct set
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    const res = await fetch("https://flashvault-production.up.railway.app/getImg", {
+      method: "POST", // ⚠️ GET se POST
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ envKey }), // ⚡ yaha magic hai
+    });
+
+    const data = await res.json();
+    setFiles(data);
+  } catch (err) {
+    console.error(err);
+  }
+    };
 
   fetchImages();
 }, []);
