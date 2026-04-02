@@ -42,6 +42,7 @@ const EnvPage = () => {
         // 🔥 success → navigate
         const wait = async () => {
           await sessionStorage.setItem("loggedIn",true)
+          await sessionStorage.setItem("envKey",key)
           navigate("/dashboardTemp", {
           state: data.user
         });

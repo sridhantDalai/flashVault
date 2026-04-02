@@ -2,6 +2,7 @@ const cloudinary = require("../uploads/upload.cloudinary.js")
 
 const getImages = async (req, res) => {
   try {
+    
     const result = await cloudinary.search
       .expression("folder:Uploads/default")
       .execute();
