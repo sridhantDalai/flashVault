@@ -49,7 +49,7 @@ router.get("/me" , (req,res) => {
 
 router.post("/check", upload.single("file") , UploadController )
 router.post("/checkTemp", upload.single("file") , UploadControllerTemp )
-router.get("/getImg",getImages)
+router.post("/getImg",getImages)
 router.delete("/delete",deleteImage)
 router.post("/db" , createUser )
 router.post("/verifyENV" , verifyEnvKey )
