@@ -28,11 +28,12 @@ const Upload = () => {
 
     // Get user from localStorage on the FRONTEND
     const user = JSON.parse(localStorage.getItem("user"));
+    const user2 = JSON.parse(sessionStorage.getItem("envKey"));
 
     const formData = new FormData();
     formData.append("file", file);
     // Pass the envKey or user info here
-    formData.append("envKey", user?.envKey || "tempUser");
+    formData.append("envKey", user?.envKey || user2 || "tempUser" );
 
     try {
       const res = await fetch("https://flashvault-production.up.railway.app/checkTemp", {
