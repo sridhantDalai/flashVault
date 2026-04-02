@@ -9,13 +9,22 @@ const DashboardTemp = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      try {
-        const res = await fetch("https://flashvault-production.up.railway.app/getImg");
-        const data = await res.json();
-        setFiles(data);
-      } catch (err) {
-        console.error(err);
-      }
+  try {
+    const envKey = sessionStorage.getItem("envKey");
+
+    const res = await fetch("https://flashvault-production.up.railway.app/getImg", {
+      method: "POST", // ⚠️ GET se POST
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ envKey }), // ⚡ yaha magic hai
+    });
+
+    const data = await res.json();
+    setFiles(data);
+  } catch (err) {
+    console.error(err);
+  }
     };
     fetchImages();
   }, []);

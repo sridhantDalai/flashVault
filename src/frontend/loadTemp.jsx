@@ -14,6 +14,7 @@ const LoadTemp = () => {
       sessionStorage.setItem("loggedIn", true)
     } else {
       sessionStorage.removeItem("loggedIn")
+      sessionStorage.removeItem("envKey")
     }
 
     const timer = setTimeout(() => {

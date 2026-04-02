@@ -1,10 +1,11 @@
-const cloudinary = require("../uploads/upload.cloudinary.js")
+const cloudinary = require("../uploads/upload.cloudinary.js");
 
 const getImages = async (req, res) => {
   try {
-    
+    const envKey = req.body.envKey || "default"; // ⚡ frontend se aayega
+
     const result = await cloudinary.search
-      .expression("folder:Uploads/default")
+      .expression(`folder:Uploads/${envKey}`) // 🔥 dynamic folder
       .execute();
 
     res.json(result.resources);
